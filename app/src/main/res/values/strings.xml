@@ -1,0 +1,51 @@
+<!-- Image placeholder: http://www.freeiconspng.com/img/23500
+No-image: http://www.freeiconspng.com/img/23499
+ take_picture: http://www.freeiconspng.com/img/41
+ picutre from file: http://icons.veryicon.com/png/System/Android%201/Very%20Basic%20image%20file.png-->
+
+<resources>
+    <string name="app_name">Store Keeper</string>
+    <string name="empty_message">Your inventory is empty.\nStart by tapping the button and adding items.</string>
+
+    <string name="delete_all">Delete All</string>
+    <string name="add_dummy">Add Dummy</string>
+    <string name="item_description">This crash dummy has test run the store keeper and is happy to report that it got unharmed through the system</string>
+    <string name="item_edit">Item:</string>
+    <string name="item_hint_edit">Specify item here</string>
+    <string name="image_edit">Image:</string>
+    <string name="price_edit">Price:\u0020</string>
+    <string name="price_hint_edit">0.00</string>
+    <string name="quantity_edit">Quantity:</string>
+    <string name="minus_edit">-</string>
+    <string name="plus_edit">+</string>
+    <string name="supplier_edit">Supplier:</string>
+    <string name="description_edit">Description:</string>
+    <string name="description_hint_edit">Any details</string>
+    <string name="order_no_edit">Order No.:</string>
+    <string name="order_no_hint_edit">Unique order number for item</string>
+    <string name="number_starter_edit">5</string>
+    <string name="new_item_editor">Add New Item</string>
+    <string name="item_editor">Edit Item</string>
+    <string name="unsaved_alert">You have unsaved information pertaining to this item. Do you want to discard them?</string>
+    <string name="discard_button">Discard</string>
+    <string name="keep_editing_button">Keep Editing</string>
+    <string name="delete_button">Delete</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="error_saving_new_item">Error occurred whilst trying to save the item</string>
+    <string name="save_new_item_success">Item was successfully saved.</string>
+    <string name="error_updating_item">An error occurred whilst trying to update the item</string>
+    <string name="save_updated_item_success">The item was successfully updated.</string>
+    <string name="error_delete_item">An error occurred whilst trying to delete the item.</string>
+    <string name="successful_item_delete">Item was successfully deleted.</string>
+    <string name="placeholder">Placeholder</string>
+    <string name="no_image">No image</string>
+    <string name="price">Price:\u0020</string>
+    <string name="in_stock">In Stock:\u0020</string>
+    <string name="delete_query">Delete this item? This action cannot be undone</string>
+    <string name="load">Load</string>
+    <string name="placeholder_email">order@supplier.com</string>
+    <string name="dummy">dummy</string>
+    <string name="email_template">Email template:</string>
+    <string name="template_email">Draft up the email for the order here. Use #ITEM# as placeholder to refer to the item you are ordering.</string>
+    <string name="spacer">\u0020</string>
+</resources>

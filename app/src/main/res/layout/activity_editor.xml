@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent">
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/standard"
+        tools:context="com.example.android.storekeeper.EditorActivity">
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/item_edit" />
+
+            <EditText
+                android:id="@+id/item_edit"
+                style="@style/Text"
+                android:hint="@string/item_hint_edit" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/price_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/currency_holder"
+                    style="@style/Text"
+                    tools:text="€" />
+
+                <EditText
+                    android:id="@+id/price_edit"
+                    style="@style/Text"
+                    android:hint="@string/price_hint_edit" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/quantity_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/decrement_quantity"
+                    style="@style/Button"
+                    android:src="@drawable/ic_minus" />
+
+                <EditText
+                    android:id="@+id/quantity_edit"
+                    style="@style/Text"
+                    android:text="@string/number_starter_edit" />
+
+                <ImageButton
+                    android:id="@+id/increment_quantity"
+                    style="@style/Button"
+                    android:src="@drawable/ic_plus" />
+            </LinearLayout>
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/order_no_edit" />
+
+            <EditText
+                android:id="@+id/order_no_edit"
+                style="@style/Text"
+                android:hint="@string/order_no_hint_edit" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/description_edit" />
+
+            <EditText
+                android:id="@+id/description_edit"
+                style="@style/Text"
+                android:hint="@string/description_hint_edit"
+                android:minLines="3" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/supplier_edit" />
+
+            <EditText
+                android:id="@+id/supplier_edit"
+                style="@style/Text"
+                android:hint="@string/placeholder_email"
+                android:inputType="textEmailAddress" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/email_template" />
+
+            <EditText
+                android:id="@+id/temp_edit"
+                style="@style/Text"
+                android:hint="@string/template_email"
+                android:minLines="3" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                style="@style/Text"
+                android:text="@string/image_edit" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/image_edit"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    tools:src="@mipmap/ic_launcher" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/spin_image_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/file_button"
+                            style="@style/Button"
+                            android:layout_margin="@dimen/standard"
+                            android:src="@drawable/ic_folder_image" />
+
+                        <ImageButton
+                            android:id="@+id/url_button"
+                            style="@style/Button"
+                            android:layout_margin="@dimen/standard"
+                            android:src="@drawable/ic_web" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </TableRow>
+
+        <LinearLayout
+            android:id="@+id/url_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/load_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/load" />
+
+            <EditText
+                android:id="@+id/url_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/standard" />
+        </LinearLayout>
+    </TableLayout>
+</ScrollView>

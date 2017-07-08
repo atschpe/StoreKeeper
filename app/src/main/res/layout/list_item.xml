@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder_catalog"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/standard"
+    android:background="@color/colorAccent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/image_catalog"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="@dimen/standard"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/price_catalog"
+        style="@style/Text"
+        android:layout_alignParentRight="true"
+        tools:text="Price: 10.99 €" />
+
+    <TextView
+        android:id="@+id/name_catalog"
+        style="@style/Text"
+        android:layout_toRightOf="@id/image_catalog"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Item" />
+
+    <ImageButton
+        android:id="@+id/increment_catalog"
+        style="@style/Button"
+        android:layout_toRightOf="@id/name_catalog"
+        android:src="@drawable/ic_plus" />
+
+    <ImageButton
+        android:id="@+id/decrement_catalog"
+        style="@style/Button"
+        android:layout_toRightOf="@id/increment_catalog"
+        android:src="@drawable/ic_minus" />
+
+    <TextView
+        android:id="@+id/quantity_catalog"
+        style="@style/Text"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/price_catalog"
+        tools:text="in Stock: 5 left" />
+
+    <TextView
+        android:id="@+id/description_catalog"
+        style="@style/Text"
+        android:layout_below="@id/quantity_catalog"
+        android:ellipsize="end"
+        android:maxLines="2"
+        tools:text="Description provided about the item. It will be truncated after two lines, but the full text can be accessed in the detailed vie, when user clicks on the item." />
+</RelativeLayout>

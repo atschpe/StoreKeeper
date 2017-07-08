@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="standard">10dp</dimen>
+
+    <!-- Remove automatic fab padding see:
+  https://stackoverflow.com/questions/38567663/how-to-remove-auto-padding-of-fab-button-in-android -->
+    <dimen name="design_fab_image_size" tools:override="true">36dp</dimen>
+</resources>
