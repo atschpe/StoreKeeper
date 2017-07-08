@@ -139,8 +139,8 @@
 
                 <ImageView
                     android:id="@+id/image_edit"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     tools:src="@mipmap/ic_launcher" />
 
                 <LinearLayout
