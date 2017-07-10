@@ -5,4 +5,12 @@
         <item>@string/no_image</item>
         <item>@string/dummy</item>
     </string-array>
+    <string-array name="settings_order_by_labels">
+        <item>@string/settings_order_by_alphabetically_label</item>
+        <item>@string/settings_order_by_quantity_label</item>
+    </string-array>
+    <string-array name="settings_order_by_values">
+        <item>@string/settings_order_by_alphabetical_value</item>
+        <item>@string/settings_order_by_quantity_value</item>
+    </string-array>
 </resources>

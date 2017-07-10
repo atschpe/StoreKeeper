@@ -51,4 +51,20 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="item_sold_out">Item is sold out. Hit order button to order stock.</string>
     <string name="dummy_order_temp">We would like to order 10 units of: #ITEM#. Sincerely #STORE#</string>
     <string name="out_of_stock">Out of stock.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Store Keeper Preferences</string>
+    <string name="order_by_default">Order By</string>
+    <string name="settings">Settings</string>
+    <string name="settings_order_by_alphabetically_label">Alphabetically</string>
+    <string name="settings_order_by_quantity_label">Low to High in Stock</string>
+    <string name="settings_order_by_alphabetical_value">ItemEntry.ITM_NAME</string>
+    <string name="settings_order_by_quantity_value">ItemEntry.ITM_QUANTITY</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_alphabetical_value</string>
+    <string name="settings_order_by_key">Order by:</string>
+    <string name="settings_order_by_label">Order By</string>
+    <string name="company_details">Company Details</string>
+    <string name="company_details_key">company key</string>
+    <string name="compnay_details_label">company</string>
+    <string name="settings_order_default">alphabetically</string>
 </resources>

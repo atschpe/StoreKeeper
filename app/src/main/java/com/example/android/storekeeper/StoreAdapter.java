@@ -186,18 +186,5 @@ public class StoreAdapter extends StoreHolder<StoreAdapter.ViewHolder> {
                 }
             }
         });
-
-        restock.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String emailTemplate = emailTempData.replaceAll("#ITEM#", nameData);
-                String addressString = "mailto:" + contactData;
-
-                Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
-                sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + nameData);
-                sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
-                ctxt.startActivity(sendMail);
-            }
-        });
     }
 }

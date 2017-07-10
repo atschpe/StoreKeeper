@@ -130,7 +130,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         quantityIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantityTracker ++;
+                quantityTracker++;
                 quantityEditor.setText(String.valueOf(quantityTracker));
             }
         });
@@ -139,7 +139,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
                 if (quantityTracker > 0) {
-                    quantityTracker --;
+                    quantityTracker--;
                 }
                 quantityEditor.setText(String.valueOf(quantityTracker));
             }
@@ -261,6 +261,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //determine what happens with option select
         switch (item.getItemId()) {
+            case R.id.restock_editor:
+                restockItem(); //send email to supplier to order new stock.
             case R.id.done_editor:
                 saveItem(); //save all information to the table
                 finish();
@@ -283,6 +285,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void restockItem() {
+        String itemName = nameEditor.getText().toString().trim();
+        String emailTemplate = templateEditor.getText().toString().trim().replaceAll("#ITEM#", itemName);
+
+        String contactEmail = supplierEditor.getText().toString().trim();
+        String addressString = "mailto:" + contactEmail;
+
+        Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
+        sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + itemName);
+        sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
+        startActivity(sendMail);
+    }
+
 
     /**
      * build warning dialog for unsaved data

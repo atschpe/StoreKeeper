@@ -1,10 +1,11 @@
 package com.example.android.storekeeper;
 
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -18,7 +19,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.storekeeper.data.StoreContract.ItemEntry;
 
@@ -66,6 +66,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
         String[] projection = {
                 ItemEntry._ID,
                 ItemEntry.ITM_IMAGE,
