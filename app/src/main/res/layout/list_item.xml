@@ -38,9 +38,9 @@
         tools:text="Description provided about the item. It will be truncated after two lines, but the full text can be accessed in the detailed vie, when user clicks on the item." />
 
     <RelativeLayout
-        android:layout_below="@id/description_catalog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/description_catalog"
         android:background="@drawable/rounded_bottom">
 
         <TextView

@@ -8,6 +8,7 @@
     tools:context="com.example.android.storekeeper.EditorActivity">
 
     <RelativeLayout
+        android:id="@+id/edit_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,12 +17,13 @@
             style="@style/Button"
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
-            android:text="Restock"/>
+            android:layout_margin="@dimen/standard"
+            android:text="Restock" />
 
         <TableLayout
-            android:layout_below="@id/restock_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/restock_edit"
             android:padding="@dimen/standard">
 
             <TableRow>
@@ -205,6 +207,7 @@
 
                 <EditText
                     android:id="@+id/url_input"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/standard" />

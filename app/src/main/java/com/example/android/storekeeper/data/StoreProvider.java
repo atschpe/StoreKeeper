@@ -210,7 +210,7 @@ public class StoreProvider extends ContentProvider {
         }
     }
 
-    private void checkItemImage (ContentValues values) {
+    private void checkItemImage(ContentValues values) {
         String image = values.getAsString(ItemEntry.ITM_IMAGE);
         if (image.isEmpty()) {
             throw new IllegalArgumentException("Item needs an image.");

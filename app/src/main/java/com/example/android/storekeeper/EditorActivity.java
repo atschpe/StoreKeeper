@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -54,7 +55,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final String LOG_TAG = EditorActivity.class.getSimpleName();
 
-    @BindView(R.id.restock_edit) Button restock;
+    @BindView(R.id.restock_edit)
+    Button restock;
     @BindView(R.id.item_edit)
     EditText nameEditor;
     @BindView(R.id.price_edit)
@@ -92,12 +94,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private boolean itemHasChanged = false; //flag whether there has been a change
 
-    //Monitor any touch events so as to change to boolean and react accordingly.
-    @OnTouch({R.id.item_edit, R.id.price_edit, R.id.quantity_edit, R.id.order_no_edit,
-            R.id.description_edit, R.id.url_input})
-    public boolean onTouch() {
-        return itemHasChanged = true;
-    }
+    private View.OnTouchListener touchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            itemHasChanged = true;
+            return false;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,21 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_editor);
 
         ButterKnife.bind(this); //Initialising
+
+        nameEditor.setOnTouchListener(touchListener);
+        priceEditor.setOnTouchListener(touchListener);
+        quantityEditor.setOnTouchListener(touchListener);
+        orderNoEditor.setOnTouchListener(touchListener);
+        descriptionEditor.setOnTouchListener(touchListener);
+        supplierEditor.setOnTouchListener(touchListener);
+        templateEditor.setOnTouchListener(touchListener);
+        imageEditor.setOnTouchListener(touchListener);
+        imageSelector.setOnTouchListener(touchListener);
+        imageFromFile.setOnTouchListener(touchListener);
+        imageFromUrl.setOnTouchListener(touchListener);
+        loadUrl.setOnTouchListener(touchListener);
+        urlInput.setOnTouchListener(touchListener);
+
 
         Intent receiveData = getIntent();//did the intent launching the editor have data attached?
         currentItemUri = receiveData.getData();
@@ -128,16 +146,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         restock.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    String itemName = nameEditor.getText().toString().trim();
-                    String emailTemplate = templateEditor.getText().toString().trim().replaceAll("#ITEM#", itemName);
+                String itemName = nameEditor.getText().toString().trim();
+                String emailTemplate = templateEditor.getText().toString().trim().replaceAll("#ITEM#", itemName);
 
-                    String contactEmail = supplierEditor.getText().toString().trim();
-                    String addressString = "mailto:" + contactEmail;
+                String contactEmail = supplierEditor.getText().toString().trim();
+                String addressString = "mailto:" + contactEmail;
 
-                    Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
-                    sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + itemName);
-                    sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
-                    startActivity(sendMail);
+                Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
+                sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + itemName);
+                sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
+                startActivity(sendMail);
             }
         });
 
@@ -248,7 +266,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         break;
                     case 3:
                         loadOther(imageEditor, imageSelected);
-
                 }
             }
 
@@ -510,9 +527,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             descriptionEditor.setText(descriptionData);
             templateEditor.setText(emailTempData);
             orderNoEditor.setText(orderNoData);
-
         }
-
     }
 
     @Override

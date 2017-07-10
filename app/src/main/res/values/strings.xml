@@ -23,7 +23,7 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="successful_item_delete">Item was successfully deleted.</string>
 
     <!-- Catalog Activity -->
-    <string name="dummy_description">This crash dummy has test run the store keeper and is happy to report that it got unharmed through the system</string>
+    <string name="dummy_description">This crash dummy has test run the store keeper and is happy to report that it got through the system unharmed.</string>
     <string name="price">Price:\u0020</string>
     <string name="in_stock">In Stock:\u0020</string>
     <string name="dummy_name">Dummy</string>
