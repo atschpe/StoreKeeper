@@ -59,4 +59,6 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="template_email">Draft up the email for the order here. Use #ITEM# as placeholder to refer to the item you are ordering.</string>
     <string name="file_url_source">from file/url</string>
     <string name="order_more">Order More</string>
+    <string name="price_requirement">Item requires price:\u0020</string>
+    <string name="quantity_required">Item requires a quantity</string>
 </resources>

@@ -348,12 +348,31 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private void saveItem() {
 
+        //retrieve data.
         String nameData = nameEditor.getText().toString().trim();
         String imageData = imageSelected;
         String priceRaw = priceEditor.getText().toString().trim().replace(currencySymbol, "");
-        double priceData = Double.parseDouble(priceRaw);
+
+        double priceData = 0;
+        try {
+            priceData = Double.parseDouble(priceRaw);
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.price_requirement) + e.getMessage(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
         String quantityRaw = quantityEditor.getText().toString().trim();
-        int quantityData = Integer.parseInt(quantityRaw);
+
+        int quantityData = 0;
+        try {
+            quantityData = Integer.parseInt(quantityRaw);
+        } catch (Exception e) {
+            Toast.makeText(this, getString(R.string.quantity_required) + e.getMessage(),
+                    Toast.LENGTH_SHORT).show();
+        }
+
+
         String supplierData = supplierEditor.getText().toString().trim();
         String orderNoData = orderNoEditor.getText().toString().trim();
         String descriptionData = descriptionEditor.getText().toString().trim();
@@ -423,14 +442,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 deleteItem(); //go to delete method
             }
         });
-        alertBuilder.setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (dialog != null) {
-                    dialog.dismiss(); //return to editor
-                }
-            }
-        });
+        alertBuilder.setNegativeButton(R.string.cancel_button, null);
         AlertDialog alertDialog = alertBuilder.create(); //create and show the dialog
         alertDialog.show();
     }

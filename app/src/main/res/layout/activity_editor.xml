@@ -50,7 +50,8 @@
                 <EditText
                     android:id="@+id/price_edit"
                     style="@style/Text"
-                    android:layout_weight="1    "
+                    android:inputType="number|numberDecimal"
+                    android:layout_weight="1"
                     android:hint="@string/price_hint_edit" />
             </TableRow>
 

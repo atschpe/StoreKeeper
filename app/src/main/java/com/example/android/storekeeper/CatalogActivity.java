@@ -3,7 +3,6 @@ package com.example.android.storekeeper;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
-import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -123,10 +122,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         values.put(ItemEntry.ITM_EMAIL_TEMP, getString(R.string.dummy_order_temp));
         values.put(ItemEntry.ITM_ORDER_NO, getString(R.string.dummy_order_no));
 
-        Uri addDummyItem = this.getContentResolver().insert(ItemEntry.CONTENT_URI, values);
+        this.getContentResolver().insert(ItemEntry.CONTENT_URI, values);
     }
 
     private void deleteAllItems() {
-        int rowsDeleted = this.getContentResolver().delete(ItemEntry.CONTENT_URI, null, null);
+        this.getContentResolver().delete(ItemEntry.CONTENT_URI, null, null);
     }
 }
