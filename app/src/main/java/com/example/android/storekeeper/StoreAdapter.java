@@ -36,25 +36,22 @@ public class StoreAdapter extends StoreHolder<StoreAdapter.ViewHolder> {
     private Context ctxt;
     private int quantity;
     private Uri selectedItemUri;
-    private CatalogActivity catAct = new CatalogActivity();
     private static String LOG_TAG = CatalogActivity.class.getSimpleName();
 
     @BindView(R.id.image_catalog)
-    ImageView image_holder;
+    ImageView imageHolder;
     @BindView(R.id.name_catalog)
-    TextView name_holder;
+    TextView nameHolder;
     @BindView(R.id.price_catalog)
-    TextView price_holder;
+    TextView priceHolder;
     @BindView(R.id.quantity_catalog)
-    TextView quantity_holder;
+    TextView quantityHolder;
     @BindView(R.id.description_catalog)
-    TextView description_holder;
+    TextView descriptionHolder;
     @BindView(R.id.holder_catalog)
-    RelativeLayout item_holder;
+    RelativeLayout itemHolder;
     @BindView(R.id.sold_catalog)
     Button soldItem;
-    @BindView(R.id.restock_catalog)
-    Button restock;
 
     /**
      * constructor
@@ -102,8 +99,6 @@ public class StoreAdapter extends StoreHolder<StoreAdapter.ViewHolder> {
         int priceColumn = crs.getColumnIndex(ItemEntry.ITM_PRICE);
         int quantityColumn = crs.getColumnIndex(ItemEntry.ITM_QUANTITY);
         int descriptionColumn = crs.getColumnIndex(ItemEntry.ITM_DESCRIPTION);
-        int emailTempColumn = crs.getColumnIndex(ItemEntry.ITM_EMAIL_TEMP);
-        int contactColumn = crs.getColumnIndex(ItemEntry.ITM_SUP_MAIL);
 
         //retrieve data
         String imageData = crs.getString(imageColumn);
@@ -111,8 +106,6 @@ public class StoreAdapter extends StoreHolder<StoreAdapter.ViewHolder> {
         double priceRawData = crs.getDouble(priceColumn);
         final int quantityRawData = crs.getInt(quantityColumn);
         String descriptionData = crs.getString(descriptionColumn);
-        final String emailTempData = crs.getString(emailTempColumn);
-        final String contactData = crs.getString(contactColumn);
 
         //Prepare price for display
         NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
@@ -132,26 +125,26 @@ public class StoreAdapter extends StoreHolder<StoreAdapter.ViewHolder> {
         quantity = quantityRawData;
 
         //set data to views
-        name_holder.setText(nameData);
-        price_holder.setText(priceData);
-        quantity_holder.setText(String.valueOf(quantityData));
-        description_holder.setText(descriptionData);
+        nameHolder.setText(nameData);
+        priceHolder.setText(priceData);
+        quantityHolder.setText(String.valueOf(quantityData));
+        descriptionHolder.setText(descriptionData);
 
         //display the image based on the format of its data.
         if (imageData.length() == 1) {
             switch (Integer.parseInt(imageData)) {
                 case ItemEntry.PLACEHOLDER_IMG:
-                    Picasso.with(ctxt).load(R.drawable.ic_image_placeholder).into(image_holder);
+                    Picasso.with(ctxt).load(R.drawable.ic_image_placeholder).into(imageHolder);
                     break;
                 case ItemEntry.NO_IMG:
-                    Picasso.with(ctxt).load(R.drawable.ic_image_placeholder).into(image_holder);
+                    Picasso.with(ctxt).load(R.drawable.ic_no_img).into(imageHolder);
                     break;
                 case ItemEntry.DUMMY_IMG:
-                    Picasso.with(ctxt).load(R.drawable.ic_dummy).into(image_holder);
+                    Picasso.with(ctxt).load(R.drawable.ic_dummy).into(imageHolder);
                     break;
             }
         } else {
-            Picasso.with(ctxt).load(imageData).into(image_holder);
+            Picasso.with(ctxt).load(imageData).into(imageHolder);
         }
 
         //open editor with loaded data of the item selected.

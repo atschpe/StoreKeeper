@@ -1,7 +1,6 @@
 package com.example.android.storekeeper;
 
 import android.app.LoaderManager;
-import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -14,7 +13,6 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,8 +23,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
+import android.widget.Spinner;;
 import android.widget.Toast;
 
 import com.example.android.storekeeper.data.StoreContract.ItemEntry;
@@ -57,6 +54,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private static final String LOG_TAG = EditorActivity.class.getSimpleName();
 
+    @BindView(R.id.restock_edit) Button restock;
     @BindView(R.id.item_edit)
     EditText nameEditor;
     @BindView(R.id.price_edit)
@@ -127,6 +125,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         setupSpinner();
 
+        restock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    String itemName = nameEditor.getText().toString().trim();
+                    String emailTemplate = templateEditor.getText().toString().trim().replaceAll("#ITEM#", itemName);
+
+                    String contactEmail = supplierEditor.getText().toString().trim();
+                    String addressString = "mailto:" + contactEmail;
+
+                    Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
+                    sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + itemName);
+                    sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
+                    startActivity(sendMail);
+            }
+        });
+
         quantityIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +163,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         imageFromFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageSelector.setSelection(3);
                 Intent getImageFile = new Intent();
                 getImageFile.setType("image/*");
                 getImageFile.setAction(Intent.ACTION_GET_CONTENT);
@@ -160,6 +175,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         imageFromUrl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                imageSelector.setSelection(3);
                 urlPrompt.setVisibility(View.VISIBLE);
 
                 Intent openBrowser = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
@@ -223,13 +239,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         imageSelected = String.valueOf(ItemEntry.PLACEHOLDER_IMG);
                         break;
                     case ItemEntry.NO_IMG:
-                        loadDrawable(imageEditor, R.drawable.ic_image_placeholder);
+                        loadDrawable(imageEditor, R.drawable.ic_no_img);
                         imageSelected = String.valueOf(ItemEntry.NO_IMG);
                         break;
                     case ItemEntry.DUMMY_IMG:
                         loadDrawable(imageEditor, R.drawable.ic_dummy);
                         imageSelected = String.valueOf(ItemEntry.DUMMY_IMG);
                         break;
+                    case 3:
+                        loadOther(imageEditor, imageSelected);
+
                 }
             }
 
@@ -237,6 +256,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });
+    }
+
+    private void loadOther(ImageView imageEditor, String imageSelected) {
+        Picasso.with(this).load(imageSelected).into(imageEditor);
     }
 
     private void loadDrawable(ImageView imageEditor, int drawable) {
@@ -261,8 +284,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { //determine what happens with option select
         switch (item.getItemId()) {
-            case R.id.restock_editor:
-                restockItem(); //send email to supplier to order new stock.
             case R.id.done_editor:
                 saveItem(); //save all information to the table
                 finish();
@@ -286,27 +307,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         return super.onOptionsItemSelected(item);
     }
 
-    private void restockItem() {
-        String itemName = nameEditor.getText().toString().trim();
-        String emailTemplate = templateEditor.getText().toString().trim().replaceAll("#ITEM#", itemName);
-
-        String contactEmail = supplierEditor.getText().toString().trim();
-        String addressString = "mailto:" + contactEmail;
-
-        Intent sendMail = new Intent(Intent.ACTION_SENDTO, Uri.parse(addressString));
-        sendMail.putExtra(Intent.EXTRA_SUBJECT, "Order: " + itemName);
-        sendMail.putExtra(Intent.EXTRA_TEXT, emailTemplate);
-        startActivity(sendMail);
-    }
-
-
     /**
      * build warning dialog for unsaved data
      *
      * @param discardClick is an onclick listener montiroing the discard action
      */
     private void warnUnsavedDialog(DialogInterface.OnClickListener discardClick) {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this, R.style.AlertDialog);
         alertBuilder.setMessage(R.string.unsaved_alert);
         alertBuilder.setPositiveButton(R.string.discard_button, discardClick);
         alertBuilder.setNegativeButton(R.string.keep_editing_button, new DialogInterface.OnClickListener() {
@@ -342,6 +349,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             return;
         }
 
+        if (TextUtils.isEmpty(nameData) || TextUtils.isEmpty(imageData)
+                || TextUtils.isEmpty(priceRaw) || TextUtils.isEmpty(quantityRaw)
+                || TextUtils.isEmpty(supplierData) || TextUtils.isEmpty(orderNoData)) {
+            Toast.makeText(this, "Please fill in all required information.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         //gather all inputs ready for storing in the table
         ContentValues itemValues = new ContentValues();
         itemValues.put(ItemEntry.ITM_NAME, nameData);
@@ -371,7 +385,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
         } else { // indicates an update
             int rowUpdated = getContentResolver().update(currentItemUri, itemValues, null, null);
-            Log.v(LOG_TAG, "row updated: " + rowUpdated);
 
             if (rowUpdated == 0) {//erroe ocurred during updating
                 Toast.makeText(this, R.string.error_updating_item, Toast.LENGTH_SHORT).show();
@@ -385,7 +398,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
      * build warning dialog for deleting data
      */
     private void confirmDeleteAction() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this, R.style.AlertDialog);
         alertBuilder.setMessage(R.string.delete_query);
         alertBuilder.setPositiveButton(R.string.delete_button, new DialogInterface.OnClickListener() {
             @Override
@@ -474,20 +487,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             String emailTempData = crs.getString(emailTempColumn);
             String orderNoData = crs.getString(orderNoColumn);
 
+            quantityTracker = quantityData;//update quantity tracker from provided data.
+            imageSelected = imageData; //update imageSelected from provided data.
+
             //display the image based on the format of its data.
-            if (imageData.length() == 1) {
-                switch (Integer.parseInt(imageData)) {
-                    case ItemEntry.PLACEHOLDER_IMG:
-                        Picasso.with(this).load(R.drawable.ic_image_placeholder).into(imageEditor);
-                        break;
-                    case ItemEntry.NO_IMG:
-                        Picasso.with(this).load(R.drawable.ic_no_img).into(imageEditor);
-                        break;
-                    case ItemEntry.DUMMY_IMG:
-                        Picasso.with(this).load(R.drawable.ic_dummy).into(imageEditor);
-                        break;
-                }
+            if (imageSelected.length() == 1) {
+                imageSelector.setSelection(Integer.parseInt(imageData));
             } else {
+                imageSelector.setSelection(3);
                 Picasso.with(this).load(imageData).into(imageEditor);
             }
 
@@ -504,8 +511,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             templateEditor.setText(emailTempData);
             orderNoEditor.setText(orderNoData);
 
-            quantityTracker = quantityData;//update quantity tracker
         }
+
     }
 
     @Override

@@ -53,16 +53,7 @@
         <Button
             android:id="@+id/sold_catalog"
             style="@style/Button"
-            android:layout_centerInParent="true"
-            android:text="Item sold" />
-
-        <Button
-            android:id="@+id/restock_catalog"
-            style="@style/Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_gravity="center_vertical"
-            android:text="restock"/>
+            android:text="Item sold" />
     </RelativeLayout>
 </RelativeLayout>

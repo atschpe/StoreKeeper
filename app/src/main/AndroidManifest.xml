@@ -19,7 +19,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditorActivity" />
+        <activity android:name=".EditorActivity"
+            android:windowSoftInputMode="stateHidden"/>
 
         <provider
             android:name=".data.StoreProvider"

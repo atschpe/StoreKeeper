@@ -1,189 +1,214 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    tools:context="com.example.android.storekeeper.EditorActivity">
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/standard"
-        tools:context="com.example.android.storekeeper.EditorActivity">
+        android:layout_height="wrap_content">
 
-        <TableRow>
+        <Button
+            android:id="@+id/restock_edit"
+            style="@style/Button"
+            android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:text="Restock"/>
 
-            <TextView
-                style="@style/Text"
-                android:text="@string/item_edit" />
+        <TableLayout
+            android:layout_below="@id/restock_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/standard">
 
-            <EditText
-                android:id="@+id/item_edit"
-                style="@style/Text"
-                android:hint="@string/item_hint_edit" />
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/price_edit" />
-
-            <EditText
-                    android:id="@+id/price_edit"
+                <TextView
                     style="@style/Text"
-                    android:hint="@string/price_hint_edit" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/quantity_edit" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:id="@+id/decrement_quantity"
-                    style="@style/ImageButton"
-                    android:src="@drawable/ic_minus" />
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/item_edit" />
 
                 <EditText
-                    android:id="@+id/quantity_edit"
+                    android:id="@+id/item_edit"
                     style="@style/Text"
-                    android:text="@string/number_starter_edit" />
+                    android:layout_weight="1"
+                    android:hint="@string/item_hint_edit" />
+            </TableRow>
 
-                <ImageButton
-                    android:id="@+id/increment_quantity"
-                    style="@style/ImageButton"
-                    android:src="@drawable/ic_plus" />
-            </LinearLayout>
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/price_edit" />
 
-            <TextView
-                style="@style/Text"
-                android:text="@string/order_no_edit" />
+                <EditText
+                    android:id="@+id/price_edit"
+                    style="@style/Text"
+                    android:layout_weight="1    "
+                    android:hint="@string/price_hint_edit" />
+            </TableRow>
 
-            <EditText
-                android:id="@+id/order_no_edit"
-                style="@style/Text"
-                android:hint="@string/order_no_hint_edit" />
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/description_edit" />
-
-            <EditText
-                android:id="@+id/description_edit"
-                style="@style/Text"
-                android:layout_weight="1"
-                android:hint="@string/description_hint_edit"
-                android:minLines="3" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/supplier_edit" />
-
-            <EditText
-                android:id="@+id/supplier_edit"
-                style="@style/Text"
-                android:hint="@string/placeholder_email"
-                android:inputType="textEmailAddress" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/email_template" />
-
-            <EditText
-                android:id="@+id/temp_edit"
-                style="@style/Text"
-                android:layout_weight="1"
-                android:hint="@string/template_email"
-                android:minLines="3" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                style="@style/Text"
-                android:text="@string/image_edit" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/image_edit"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    tools:src="@mipmap/ic_launcher" />
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/quantity_edit" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/spin_image_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <ImageButton
+                        android:id="@+id/decrement_quantity"
+                        style="@style/ImageButton"
+                        android:src="@drawable/ic_minus" />
+
+                    <EditText
+                        android:id="@+id/quantity_edit"
+                        style="@style/Text"
+                        android:text="@string/number_starter_edit" />
+
+                    <ImageButton
+                        android:id="@+id/increment_quantity"
+                        style="@style/ImageButton"
+                        android:src="@drawable/ic_plus" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/order_no_edit" />
+
+                <EditText
+                    android:id="@+id/order_no_edit"
+                    style="@style/Text"
+                    android:layout_weight="1"
+                    android:hint="@string/order_no_hint_edit" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_not_required"
+                    android:text="@string/description_edit" />
+
+                <EditText
+                    android:id="@+id/description_edit"
+                    style="@style/Text"
+                    android:layout_weight="1"
+                    android:hint="@string/description_hint_edit"
+                    android:minLines="3" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/supplier_edit" />
+
+                <EditText
+                    android:id="@+id/supplier_edit"
+                    style="@style/Text"
+                    android:layout_weight="1    "
+                    android:hint="@string/placeholder_email"
+                    android:inputType="textEmailAddress" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_not_required"
+                    android:text="@string/email_template" />
+
+                <EditText
+                    android:id="@+id/temp_edit"
+                    style="@style/Text"
+                    android:layout_weight="1"
+                    android:hint="@string/template_email"
+                    android:minLines="3" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    style="@style/Text"
+                    android:drawableLeft="@drawable/ic_required"
+                    android:text="@string/image_edit" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/image_edit"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        tools:src="@mipmap/ic_launcher" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
-                        <ImageButton
-                            android:id="@+id/file_button"
-                            style="@style/ImageButton"
-                            android:layout_margin="@dimen/standard"
-                            android:src="@drawable/ic_folder_image" />
+                        <Spinner
+                            android:id="@+id/spin_image_edit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
-                        <ImageButton
-                            android:id="@+id/url_button"
-                            style="@style/ImageButton"
-                            android:layout_margin="@dimen/standard"
-                            android:src="@drawable/ic_web" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <ImageButton
+                                android:id="@+id/file_button"
+                                style="@style/ImageButton"
+                                android:layout_margin="@dimen/standard"
+                                android:src="@drawable/ic_folder_image" />
+
+                            <ImageButton
+                                android:id="@+id/url_button"
+                                style="@style/ImageButton"
+                                android:layout_margin="@dimen/standard"
+                                android:src="@drawable/ic_web" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </TableRow>
+            </TableRow>
 
-        <LinearLayout
-            android:id="@+id/url_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <Button
-                android:id="@+id/load_url"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/load" />
-
-            <EditText
-                android:id="@+id/url_input"
+            <LinearLayout
+                android:id="@+id/url_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/standard" />
-        </LinearLayout>
-    </TableLayout>
+                android:background="@color/colorAccent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/load_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/load" />
+
+                <EditText
+                    android:id="@+id/url_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/standard" />
+            </LinearLayout>
+        </TableLayout>
+    </RelativeLayout>
 </ScrollView>

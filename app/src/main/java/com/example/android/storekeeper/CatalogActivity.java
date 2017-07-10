@@ -2,10 +2,8 @@ package com.example.android.storekeeper;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -14,7 +12,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -114,27 +111,21 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private void addDummyItem() {
 
-        //dummy image.
-        String imageData = String.valueOf(ItemEntry.DUMMY_IMG);
-
         //Gather values from dummy
         ContentValues values = new ContentValues();
-        values.put(ItemEntry.ITM_NAME, "Dummy");
-        values.put(ItemEntry.ITM_IMAGE, imageData);
+        values.put(ItemEntry.ITM_NAME, getString(R.string.dummy_name));
+        values.put(ItemEntry.ITM_IMAGE, String.valueOf(ItemEntry.DUMMY_IMG));
         values.put(ItemEntry.ITM_PRICE, 10.00);
         values.put(ItemEntry.ITM_QUANTITY, 5);
-        values.put(ItemEntry.ITM_SUP_MAIL, "order@supplier.com");
+        values.put(ItemEntry.ITM_SUP_MAIL, getString(R.string.dummy_email));
         values.put(ItemEntry.ITM_DESCRIPTION, getString(R.string.dummy_description));
         values.put(ItemEntry.ITM_EMAIL_TEMP, getString(R.string.dummy_order_temp));
-        values.put(ItemEntry.ITM_ORDER_NO, "000000");
+        values.put(ItemEntry.ITM_ORDER_NO, getString(R.string.dummy_order_no));
 
         Uri addDummyItem = this.getContentResolver().insert(ItemEntry.CONTENT_URI, values);
-        Log.v(LOG_TAG, "Dummy added to item table of the database.");
     }
 
     private void deleteAllItems() {
         int rowsDeleted = this.getContentResolver().delete(ItemEntry.CONTENT_URI, null, null);
-        Log.v(LOG_TAG, rowsDeleted + "rows have been deleted from the item table in the database.");
     }
-
 }
