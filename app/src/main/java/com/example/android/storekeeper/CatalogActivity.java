@@ -78,7 +78,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoadFinished(android.content.Loader<Cursor> loader, Cursor data) {
-        if (data != null) {
+        if (!data.moveToFirst()) {
+            empty.setVisibility(View.VISIBLE);
+        } else {
             empty.setVisibility(View.GONE);
         }
         inventAdapter.swapCursor(data); //update cursor with data
@@ -86,7 +88,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     @Override
     public void onLoaderReset(android.content.Loader<Cursor> loader) {
-        empty.setVisibility(View.VISIBLE);
         inventAdapter.swapCursor(null); // release all data from cursor
     }
 

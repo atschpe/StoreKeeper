@@ -32,6 +32,7 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="dummy_order_temp">We would like to order 10 units of: #ITEM#.</string>
     <string name="out_of_stock">Sold out. Click on item to access restock button.</string>
     <string name="spacer">\u0020</string>
+    <string name="sale">Sale</string>
 
     <!--Editor Activity -->
     <string name="item_edit">Item:</string>
@@ -57,4 +58,5 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="email_template">Email\ntemplate:</string>
     <string name="template_email">Draft up the email for the order here. Use #ITEM# as placeholder to refer to the item you are ordering.</string>
     <string name="file_url_source">from file/url</string>
+    <string name="order_more">Order More</string>
 </resources>

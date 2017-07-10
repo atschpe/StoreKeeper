@@ -54,6 +54,6 @@
             android:id="@+id/sold_catalog"
             style="@style/Button"
             android:layout_alignParentRight="true"
-            android:text="Item sold" />
+            android:text="@string/sale" />
     </RelativeLayout>
 </RelativeLayout>

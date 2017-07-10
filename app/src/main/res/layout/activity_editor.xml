@@ -18,7 +18,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/standard"
-            android:text="Restock" />
+            android:text="@string/order_more" />
 
         <TableLayout
             android:layout_width="match_parent"

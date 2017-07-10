@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <!-- https://stackoverflow.com/questions/27414173/equivalent-of-listview-setemptyview-in-recyclerview-->
     <TextView
         android:id="@+id/empty_view"
         style="@style/Text"
