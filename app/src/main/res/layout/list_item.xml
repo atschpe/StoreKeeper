@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/standard"
-    android:background="@color/colorAccent"
+    android:background="@drawable/rounded_background"
     android:orientation="horizontal">
 
     <ImageView
@@ -29,30 +29,40 @@
         android:textStyle="bold"
         tools:text="Item" />
 
-    <ImageButton
-        android:id="@+id/increment_catalog"
-        style="@style/Button"
-        android:layout_toRightOf="@id/name_catalog"
-        android:src="@drawable/ic_plus" />
-
-    <ImageButton
-        android:id="@+id/decrement_catalog"
-        style="@style/Button"
-        android:layout_toRightOf="@id/increment_catalog"
-        android:src="@drawable/ic_minus" />
-
-    <TextView
-        android:id="@+id/quantity_catalog"
-        style="@style/Text"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/price_catalog"
-        tools:text="in Stock: 5 left" />
-
     <TextView
         android:id="@+id/description_catalog"
         style="@style/Text"
-        android:layout_below="@id/quantity_catalog"
+        android:layout_below="@id/image_catalog"
         android:ellipsize="end"
         android:maxLines="2"
         tools:text="Description provided about the item. It will be truncated after two lines, but the full text can be accessed in the detailed vie, when user clicks on the item." />
+
+    <RelativeLayout
+        android:layout_below="@id/description_catalog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_bottom">
+
+        <TextView
+            android:id="@+id/quantity_catalog"
+            style="@style/Text"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorAccent"
+            tools:text="in Stock: 5 left" />
+
+        <Button
+            android:id="@+id/sold_catalog"
+            style="@style/Button"
+            android:layout_centerInParent="true"
+            android:text="Item sold" />
+
+        <Button
+            android:id="@+id/restock_catalog"
+            style="@style/Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:text="restock"/>
+    </RelativeLayout>
 </RelativeLayout>

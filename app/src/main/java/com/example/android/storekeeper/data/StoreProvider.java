@@ -232,8 +232,8 @@ public class StoreProvider extends ContentProvider {
     }
 
     private void checkItemSupplier(ContentValues values) {
-        int supplier = values.getAsInteger(ItemEntry.ITM_SUP_MAIL);
-        if (supplier < 0) {
+        String supplier = values.getAsString(ItemEntry.ITM_SUP_MAIL);
+        if (supplier.isEmpty()) {
             throw new IllegalArgumentException("Supplier needs to be added.");
         }
     }

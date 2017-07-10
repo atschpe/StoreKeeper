@@ -30,21 +30,10 @@
                 style="@style/Text"
                 android:text="@string/price_edit" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/currency_holder"
-                    style="@style/Text"
-                    tools:text="€" />
-
-                <EditText
+            <EditText
                     android:id="@+id/price_edit"
                     style="@style/Text"
                     android:hint="@string/price_hint_edit" />
-            </LinearLayout>
         </TableRow>
 
         <TableRow>
@@ -60,7 +49,7 @@
 
                 <ImageButton
                     android:id="@+id/decrement_quantity"
-                    style="@style/Button"
+                    style="@style/ImageButton"
                     android:src="@drawable/ic_minus" />
 
                 <EditText
@@ -70,7 +59,7 @@
 
                 <ImageButton
                     android:id="@+id/increment_quantity"
-                    style="@style/Button"
+                    style="@style/ImageButton"
                     android:src="@drawable/ic_plus" />
             </LinearLayout>
         </TableRow>
@@ -96,6 +85,7 @@
             <EditText
                 android:id="@+id/description_edit"
                 style="@style/Text"
+                android:layout_weight="1"
                 android:hint="@string/description_hint_edit"
                 android:minLines="3" />
         </TableRow>
@@ -122,6 +112,7 @@
             <EditText
                 android:id="@+id/temp_edit"
                 style="@style/Text"
+                android:layout_weight="1"
                 android:hint="@string/template_email"
                 android:minLines="3" />
         </TableRow>
@@ -160,13 +151,13 @@
 
                         <ImageButton
                             android:id="@+id/file_button"
-                            style="@style/Button"
+                            style="@style/ImageButton"
                             android:layout_margin="@dimen/standard"
                             android:src="@drawable/ic_folder_image" />
 
                         <ImageButton
                             android:id="@+id/url_button"
-                            style="@style/Button"
+                            style="@style/ImageButton"
                             android:layout_margin="@dimen/standard"
                             android:src="@drawable/ic_web" />
                     </LinearLayout>

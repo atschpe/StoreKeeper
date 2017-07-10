@@ -1,6 +1,7 @@
 package com.example.android.storekeeper;
 
 import android.app.LoaderManager;
+import android.content.ClipData;
 import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
@@ -58,8 +59,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     @BindView(R.id.item_edit)
     EditText nameEditor;
-    @BindView(R.id.currency_holder)
-    TextView currencyHolder;
     @BindView(R.id.price_edit)
     EditText priceEditor;
     @BindView(R.id.quantity_edit)
@@ -74,6 +73,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     EditText descriptionEditor;
     @BindView(R.id.supplier_edit)
     EditText supplierEditor;
+    @BindView(R.id.temp_edit)
+    EditText templateEditor;
     @BindView(R.id.image_edit)
     ImageView imageEditor;
     @BindView(R.id.spin_image_edit)
@@ -89,7 +90,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @BindView(R.id.url_input)
     EditText urlInput;
 
-    int quantityTracker = 5; //keep track of the quantity
+    int quantityTracker; //keep track of the quantity
 
     private boolean itemHasChanged = false; //flag whether there has been a change
 
@@ -112,6 +113,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (currentItemUri == null) {
             setTitle(getString(R.string.new_item_editor)); //no data: user intends to add new item
+            quantityEditor.setText("5");
             invalidateOptionsMenu();
         } else {
             setTitle(getString(R.string.item_editor)); //data transferred: user intends to edit it.
@@ -120,15 +122,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             getLoaderManager().initLoader(EXISTING_ITM_LOADER, null, this);//initiate data loading.
         }
 
-        currencySymbol = String.valueOf(Currency.getInstance(Locale.getDefault()));
-        currencyHolder.setText(currencySymbol);
+        Currency currency = Currency.getInstance(Locale.getDefault());
+        currencySymbol = String.valueOf(currency.getSymbol(Locale.getDefault()));
 
         setupSpinner();
 
         quantityIncrement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                quantityTracker += 1;
+                quantityTracker ++;
                 quantityEditor.setText(String.valueOf(quantityTracker));
             }
         });
@@ -137,7 +139,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
                 if (quantityTracker > 0) {
-                    quantityTracker -= 1;
+                    quantityTracker --;
                 }
                 quantityEditor.setText(String.valueOf(quantityTracker));
             }
@@ -221,7 +223,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         imageSelected = String.valueOf(ItemEntry.PLACEHOLDER_IMG);
                         break;
                     case ItemEntry.NO_IMG:
-                        loadDrawable(imageEditor, R.drawable.ic_no_image);
+                        loadDrawable(imageEditor, R.drawable.ic_image_placeholder);
                         imageSelected = String.valueOf(ItemEntry.NO_IMG);
                         break;
                     case ItemEntry.DUMMY_IMG:
@@ -315,6 +317,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         String supplierData = supplierEditor.getText().toString().trim();
         String orderNoData = orderNoEditor.getText().toString().trim();
         String descriptionData = descriptionEditor.getText().toString().trim();
+        String templateData = templateEditor.getText().toString().trim();
 
         //if there is no uri or any views populated return early => nothing to add/update
         if (currentItemUri == null && TextUtils.isEmpty(nameData) && TextUtils.isEmpty(imageData)
@@ -331,12 +334,16 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         itemValues.put(ItemEntry.ITM_QUANTITY, quantityData);
         itemValues.put(ItemEntry.ITM_SUP_MAIL, supplierData);
         itemValues.put(ItemEntry.ITM_ORDER_NO, orderNoData);
-        itemValues.put(ItemEntry.ITM_DESCRIPTION, descriptionData);
 
         if (descriptionData.isEmpty()) {
             descriptionData = ""; // leave empty
         }
         itemValues.put(ItemEntry.ITM_DESCRIPTION, descriptionData);
+
+        if (templateData.isEmpty()) {
+            templateData = ""; // leave empty
+        }
+        itemValues.put(ItemEntry.ITM_EMAIL_TEMP, templateData);
 
         if (currentItemUri == null) { //indicates a new item being added
             Uri newItem = getContentResolver().insert(ItemEntry.CONTENT_URI, itemValues);
@@ -420,6 +427,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                 ItemEntry.ITM_QUANTITY,
                 ItemEntry.ITM_SUP_MAIL,
                 ItemEntry.ITM_DESCRIPTION,
+                ItemEntry.ITM_EMAIL_TEMP,
                 ItemEntry.ITM_ORDER_NO};
         return new CursorLoader(this, currentItemUri, projection, null, null, null);
     }
@@ -437,6 +445,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int quantityColumn = crs.getColumnIndex(ItemEntry.ITM_QUANTITY);
             int supplierColumn = crs.getColumnIndex(ItemEntry.ITM_SUP_MAIL);
             int descriptionColumn = crs.getColumnIndex(ItemEntry.ITM_DESCRIPTION);
+            int emailTempColumn = crs.getColumnIndex(ItemEntry.ITM_EMAIL_TEMP);
             int orderNoColumn = crs.getColumnIndex(ItemEntry.ITM_ORDER_NO);
 
             //get data from columns
@@ -446,6 +455,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int quantityData = crs.getInt(quantityColumn);
             String supplierData = crs.getString(supplierColumn);
             String descriptionData = crs.getString(descriptionColumn);
+            String emailTempData = crs.getString(emailTempColumn);
             String orderNoData = crs.getString(orderNoColumn);
 
             //display the image based on the format of its data.
@@ -455,7 +465,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
                         Picasso.with(this).load(R.drawable.ic_image_placeholder).into(imageEditor);
                         break;
                     case ItemEntry.NO_IMG:
-                        Picasso.with(this).load(R.drawable.ic_no_image).into(imageEditor);
+                        Picasso.with(this).load(R.drawable.ic_no_img).into(imageEditor);
                         break;
                     case ItemEntry.DUMMY_IMG:
                         Picasso.with(this).load(R.drawable.ic_dummy).into(imageEditor);
@@ -475,19 +485,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             quantityEditor.setText(String.valueOf(quantityData));
             supplierEditor.setText(supplierData);
             descriptionEditor.setText(descriptionData);
+            templateEditor.setText(emailTempData);
             orderNoEditor.setText(orderNoData);
+
+            quantityTracker = quantityData;//update quantity tracker
         }
     }
-
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) { //reset all fields if loader is invalidated
         nameEditor.setText("");
         imageEditor.setImageResource(R.drawable.ic_image_placeholder);
         priceEditor.setText("");
-        quantityEditor.setText(String.valueOf(quantityTracker));
+        quantityEditor.setText("5");
         supplierEditor.setText("");
         descriptionEditor.setText("");
+        templateEditor.setText("");
         orderNoEditor.setText("");
     }
 }

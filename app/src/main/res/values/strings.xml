@@ -1,7 +1,7 @@
 <!-- Image placeholder: http://www.freeiconspng.com/img/23500
 No-image: http://www.freeiconspng.com/img/23499
- take_picture: http://www.freeiconspng.com/img/41
- picutre from file: http://icons.veryicon.com/png/System/Android%201/Very%20Basic%20image%20file.png-->
+ picture from file: http://icons.veryicon.com/png/System/Android%201/Very%20Basic%20image%20file.png
+ <div>Icon made from <a href="http://www.onlinewebfonts.com/icon">Icon Fonts</a> is licensed by CC BY 3.0</div>-->
 
 <resources>
     <string name="app_name">Store Keeper</string>
@@ -9,7 +9,7 @@ No-image: http://www.freeiconspng.com/img/23499
 
     <string name="delete_all">Delete All</string>
     <string name="add_dummy">Add Dummy</string>
-    <string name="item_description">This crash dummy has test run the store keeper and is happy to report that it got unharmed through the system</string>
+    <string name="dummy_description">This crash dummy has test run the store keeper and is happy to report that it got unharmed through the system</string>
     <string name="item_edit">Item:</string>
     <string name="item_hint_edit">Specify item here</string>
     <string name="image_edit">Image:</string>
@@ -46,6 +46,9 @@ No-image: http://www.freeiconspng.com/img/23499
     <string name="placeholder_email">order@supplier.com</string>
     <string name="dummy">dummy</string>
     <string name="email_template">Email template:</string>
-    <string name="template_email">Draft up the email for the order here. Use #ITEM# as placeholder to refer to the item you are ordering.</string>
+    <string name="template_email">Draft up the email for the order here. Use #ITEM# as placeholder to refer to the item you are ordering.; #STORE# to refer to your company</string>
     <string name="spacer">\u0020</string>
+    <string name="item_sold_out">Item is sold out. Hit order button to order stock.</string>
+    <string name="dummy_order_temp">We would like to order 10 units of: #ITEM#. Sincerely #STORE#</string>
+    <string name="out_of_stock">Out of stock.</string>
 </resources>
