@@ -54,8 +54,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        rv.setLayoutManager(viewManager);//set layout Manager to recycler view
-        rv.setAdapter(inventAdapter);//set adapter to populate recycler view
+        rv.setLayoutManager(viewManager);//set layout Manager to RecyclerView
+        rv.setAdapter(inventAdapter);//set adapter to populate RecyclerView
 
         getLoaderManager().initLoader(INV_LOADER, null, this);//initiate loader to populate list.
     }
